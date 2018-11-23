@@ -30,6 +30,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile('com.jcodecraeer:xrecyclerview:1.5.9')
     compile 'org.greenrobot:eventbus:3.1.1'
-
+    compile 'com.google.code.gson:gson:2.6.2'
 
 }

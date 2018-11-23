@@ -1,5 +1,6 @@
 package z.j.j.androidstudy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,11 +13,16 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import z.j.j.androidstudy.activity.BaseActivity;
+import z.j.j.androidstudy.activity.ViewTestActivity;
+import z.j.j.androidstudy.utils.EventBusUtil;
 import z.j.j.androidstudy.utils.ToastUtils;
 import z.j.j.androidstudy.view.TopView;
 
@@ -31,10 +37,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list.add("1");
+        list.add("zidingyiView");
         list.add("2");
         list.add("3");
         initView();
+        EventBusUtil.register(this);
     }
 
     private void initView() {
@@ -52,6 +59,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 ToastUtils.showToas((String) list.get(position)) ;
+               switch (position){
+                   case 0:
+                       Intent intent=new Intent(MainActivity.this, ViewTestActivity.class);
+                       startActivity(intent);
+                       break;
+               }
             }
 
             @Override
@@ -85,7 +98,13 @@ public class MainActivity extends BaseActivity {
 
     }
 
-   class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBusUtil.unregister(this);
+    }
+
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
        public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
            this.onItemClickListener = onItemClickListener;
@@ -97,6 +116,7 @@ public class MainActivity extends BaseActivity {
            TextView textView=new TextView(MainActivity.this);
            textView.setTextSize(15);
            textView.setTextColor(0xff3093fe);
+           textView.setPadding(10,10,10,10);
            ViewHolder viewHolder = new ViewHolder(textView);
            viewHolder.mTxt=textView;
            return viewHolder;

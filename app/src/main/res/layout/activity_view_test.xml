@@ -12,12 +12,15 @@
     </z.j.j.androidstudy.view.TopView>
 
      <TextView
+         android:id="@+id/tv1"
          android:layout_width="match_parent"
          android:layout_height="40dp"
          android:text="111111111111"
          android:gravity="center" />
 
     <TextView
+        android:id="@+id/tv2"
+
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="22222222222"
