@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hxb.easynavigition.view.EasyNavigitionBar;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -22,139 +23,53 @@ import java.util.List;
 
 import z.j.j.androidstudy.activity.BaseActivity;
 import z.j.j.androidstudy.activity.ViewTestActivity;
+import z.j.j.androidstudy.fragment.FirstFragment;
 import z.j.j.androidstudy.utils.EventBusUtil;
 import z.j.j.androidstudy.utils.ToastUtils;
 import z.j.j.androidstudy.view.TopView;
 
 public class MainActivity extends BaseActivity {
-    private TopView topView;
-    private TopView topview;
-    private XRecyclerView mRecyclerView;
-    private List list=new ArrayList();
+    private String[] tabText = {"首页", "发现", "消息", "我的"};
+    //未选中icon
+    private int[] normalIcon = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+    //选中时icon
+    private int[] selectIcon = {R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round};
 
+    private List<android.support.v4.app.Fragment> fragments = new ArrayList<>();
+    private EasyNavigitionBar navigitionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list.add("zidingyiView");
-        list.add("2");
-        list.add("3");
+        fragments.add(new FirstFragment());
+        fragments.add(new FirstFragment());
+        fragments.add(new FirstFragment());
+        fragments.add(new FirstFragment());
         initView();
-        EventBusUtil.register(this);
     }
 
     private void initView() {
-        topview = (TopView) findViewById(R.id.topview);
-        topview.getTop_title().setText("XRecyclerView");
-        topview.getTop_left().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        mRecyclerView=findViewById(R.id.xrecycler);
-        final MyAdapter  mAdapter=new MyAdapter();
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                ToastUtils.showToas((String) list.get(position)) ;
-               switch (position){
-                   case 0:
-                       Intent intent=new Intent(MainActivity.this, ViewTestActivity.class);
-                       startActivity(intent);
-                       break;
-               }
-            }
 
-            @Override
-            public void onItemLongClick(View view, int position) {
-
-            }
-        });
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setPullRefreshEnabled(false);
-        mRecyclerView.setLoadingMoreEnabled(false);
-        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallPulse);
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
-        mRecyclerView.setArrowImageView(R.drawable.ic_launcher_background);
-        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-                list.remove(list.size()-1);
-                mAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                list.add(list.size()+1+"");
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-        mRecyclerView.setAdapter(mAdapter);
-
+        navigitionBar=findViewById(R.id.navigitionBar);
+        navigitionBar.titleItems(tabText)
+                .normalIconItems(normalIcon)
+                .selectIconItems(selectIcon)
+                .fragmentList(fragments)
+                .fragmentManager(getSupportFragmentManager())
+                .mode(EasyNavigitionBar.MODE_ADD)
+                .addIcon(R.mipmap.ic_launcher_round)
+                .addLayoutHeight(100)
+                .navigitionHeight(60)
+                .canScroll(true)
+                .smoothScroll(true)
+                .build();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBusUtil.unregister(this);
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
-       public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-           this.onItemClickListener = onItemClickListener;
-       }
-
-       OnItemClickListener onItemClickListener;
-       @Override
-       public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-           TextView textView=new TextView(MainActivity.this);
-           textView.setTextSize(15);
-           textView.setTextColor(0xff3093fe);
-           textView.setPadding(10,10,10,10);
-           ViewHolder viewHolder = new ViewHolder(textView);
-           viewHolder.mTxt=textView;
-           return viewHolder;
-       }
-
-       @Override
-       public void onBindViewHolder(final ViewHolder holder, final int position) {
-           holder.mTxt.setText(list.get(position)+"");
-           holder.mTxt.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   if(onItemClickListener!=null){
-                       onItemClickListener.onItemClick(v,position);
-                   }
-               }
-           });
-       }
-
-       @Override
-       public int getItemCount() {
-           return list.size();
-       }
-
-       public class ViewHolder extends RecyclerView.ViewHolder
-       {
-           public ViewHolder(View arg0)
-           {
-               super(arg0);
-           }
-           TextView mTxt;
-
-
-       }
-
-
-   }
-    public   interface    OnItemClickListener {
-        void onItemClick(View view,int position);
-        void onItemLongClick(View view,int position);
-    }
 }

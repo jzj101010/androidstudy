@@ -6,17 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="z.j.j.androidstudy.MainActivity">
-  <z.j.j.androidstudy.view.TopView
-      android:id="@+id/topview"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-   <com.jcodecraeer.xrecyclerview.XRecyclerView
-       android:id="@+id/xrecycler"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+
+    <com.hxb.easynavigition.view.EasyNavigitionBar
+        android:id="@+id/navigitionBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-   </com.jcodecraeer.xrecyclerview.XRecyclerView>
-
-
+    </com.hxb.easynavigition.view.EasyNavigitionBar>
 </LinearLayout>
