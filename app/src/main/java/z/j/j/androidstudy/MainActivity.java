@@ -24,6 +24,9 @@ import java.util.List;
 import z.j.j.androidstudy.activity.BaseActivity;
 import z.j.j.androidstudy.activity.ViewTestActivity;
 import z.j.j.androidstudy.fragment.FirstFragment;
+import z.j.j.androidstudy.fragment.FourthFragment;
+import z.j.j.androidstudy.fragment.SecondFragment;
+import z.j.j.androidstudy.fragment.ThirdFragment;
 import z.j.j.androidstudy.utils.EventBusUtil;
 import z.j.j.androidstudy.utils.ToastUtils;
 import z.j.j.androidstudy.view.TopView;
@@ -43,26 +46,26 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragments.add(new FirstFragment());
-        fragments.add(new FirstFragment());
-        fragments.add(new FirstFragment());
-        fragments.add(new FirstFragment());
+        fragments.add(new SecondFragment());
+        fragments.add(new ThirdFragment());
+        fragments.add(new FourthFragment());
         initView();
     }
 
     private void initView() {
-
+         //https://github.com/hexingbo/EasyNavigition
         navigitionBar=findViewById(R.id.navigitionBar);
         navigitionBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
                 .selectIconItems(selectIcon)
                 .fragmentList(fragments)
                 .fragmentManager(getSupportFragmentManager())
-                .mode(EasyNavigitionBar.MODE_ADD)
-                .addIcon(R.mipmap.ic_launcher_round)
-                .addLayoutHeight(100)
+//                .mode(EasyNavigitionBar.MODE_ADD)
+//                .addIcon(R.mipmap.ic_launcher_round)
+//                .addLayoutHeight(100)
                 .navigitionHeight(60)
                 .canScroll(true)
-                .smoothScroll(true)
+//                .smoothScroll(true)
                 .build();
     }
 
