@@ -1,42 +1,22 @@
 package z.j.j.androidstudy;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.hxb.easynavigition.view.EasyNavigitionBar;
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import z.j.j.androidstudy.activity.BaseActivity;
-import z.j.j.androidstudy.activity.ViewTestActivity;
 import z.j.j.androidstudy.fragment.FirstFragment;
 import z.j.j.androidstudy.fragment.FourthFragment;
 import z.j.j.androidstudy.fragment.SecondFragment;
 import z.j.j.androidstudy.fragment.ThirdFragment;
-import z.j.j.androidstudy.utils.EventBusUtil;
-import z.j.j.androidstudy.utils.ToastUtils;
-import z.j.j.androidstudy.view.TopView;
+
 
 public class MainActivity extends BaseActivity {
-    private String[] tabText = {"首页", "发现", "消息", "我的"};
+    private String[] tabText = {"RECYCLERVIEW", "VIEWPAGER", "消息", "我的"};
     //未选中icon
-    private int[] normalIcon = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+    private int[] normalIcon = {R.mipmap.uncheck, R.mipmap.uncheck, R.mipmap.uncheck, R.mipmap.uncheck};
     //选中时icon
-    private int[] selectIcon = {R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round};
+    private int[] selectIcon = {R.mipmap.check, R.mipmap.check, R.mipmap.check, R.mipmap.check};
 
     private List<android.support.v4.app.Fragment> fragments = new ArrayList<>();
     private EasyNavigitionBar navigitionBar;
@@ -66,6 +46,8 @@ public class MainActivity extends BaseActivity {
                 .navigitionHeight(60)
                 .canScroll(true)
 //                .smoothScroll(true)
+                    .iconSize(20)
+                   .tabTextSize(12)
                 .build();
     }
 
