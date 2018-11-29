@@ -1,10 +1,14 @@
 package z.j.j.androidstudy.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
@@ -24,6 +28,7 @@ import z.j.j.androidstudy.R;
 public class SecondFragment extends BaseFragment {
 
 
+    private static final String TAG = SecondFragment.class.getSimpleName();
     private ViewPager vp_view;
     private TextView tv_title;
     private LinearLayout li_point;
@@ -31,6 +36,18 @@ public class SecondFragment extends BaseFragment {
     private List<ImageView> points=new ArrayList<>();
     private MyPagerAdapt myPagerAdapt=new MyPagerAdapt();
 
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    vp_view.setCurrentItem(vp_view.getCurrentItem()+1);
+                    handler.sendEmptyMessageDelayed(0,2000);
+                    break;
+            }
+        }
+    };
 
     @Nullable
     @Override
@@ -57,7 +74,11 @@ public class SecondFragment extends BaseFragment {
             points.add(point);
 
         }
+
         vp_view.setAdapter(myPagerAdapt);
+        vp_view.setCurrentItem(Integer.MAX_VALUE/2-Integer.MAX_VALUE/2%imageViews.size());
+        tv_title.setText("1");
+        handler.sendEmptyMessageDelayed(0,2000);
         vp_view.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -66,15 +87,27 @@ public class SecondFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
+                int  realPosition=position%imageViews.size();
                 for (int i = 0; i <points.size() ; i++) {
-                    points.get(i).setEnabled(position==i);
+                    points.get(i).setEnabled(realPosition==i);
                 }
-                tv_title.setText(position+1+"");
+                tv_title.setText(realPosition+1+"");
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                   switch (state){
+                       case ViewPager.SCROLL_STATE_IDLE:
 
+                           break;
+                       case ViewPager.SCROLL_STATE_DRAGGING:
+                           handler.removeCallbacksAndMessages(null);
+                           break;
+                       case ViewPager.SCROLL_STATE_SETTLING:
+                           handler.removeCallbacksAndMessages(null);
+                           handler.sendEmptyMessageDelayed(0,2000);
+                           break;
+                   }
             }
         });
         return view;
@@ -91,7 +124,7 @@ public class SecondFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return imageViews.size();
+            return Integer.MAX_VALUE;
         }
 
         @Override
@@ -101,7 +134,33 @@ public class SecondFragment extends BaseFragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            ImageView imageView=imageViews.get(position);
+            int  realPosition=position%imageViews.size();
+            ImageView imageView=imageViews.get(realPosition);
+            imageView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()){
+                        case  MotionEvent.ACTION_DOWN:
+                            Log.e(TAG,"ACTION_DOWN");
+                            handler.removeCallbacksAndMessages(null);
+                            break;
+                        case  MotionEvent.ACTION_MOVE:
+                            Log.e(TAG,"ACTION_MOVE");
+                            break;
+                        case  MotionEvent.ACTION_CANCEL:
+                            Log.e(TAG,"ACTION_CANCEL");
+
+                            handler.sendEmptyMessageDelayed(0,2000);
+                            break;
+                        case  MotionEvent.ACTION_UP:
+                            Log.e(TAG,"ACTION_UP");
+                            handler.sendEmptyMessageDelayed(0,2000);
+                            break;
+                    }
+
+                    return false;
+                }
+            });
             container.addView(imageView);
             return imageView;
         }

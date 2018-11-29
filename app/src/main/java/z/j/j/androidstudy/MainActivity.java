@@ -1,6 +1,9 @@
 package z.j.j.androidstudy;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
 import com.hxb.easynavigition.view.EasyNavigitionBar;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ import z.j.j.androidstudy.fragment.ThirdFragment;
 
 
 public class MainActivity extends BaseActivity {
-    private String[] tabText = {"RECYCLERVIEW", "VIEWPAGER", "消息", "我的"};
+    private String[] tabText = {"RECYCLERV", "VIEWPAGER", "me", "me"};
     //未选中icon
     private int[] normalIcon = {R.mipmap.uncheck, R.mipmap.uncheck, R.mipmap.uncheck, R.mipmap.uncheck};
     //选中时icon
@@ -20,6 +23,7 @@ public class MainActivity extends BaseActivity {
 
     private List<android.support.v4.app.Fragment> fragments = new ArrayList<>();
     private EasyNavigitionBar navigitionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +44,15 @@ public class MainActivity extends BaseActivity {
                 .selectIconItems(selectIcon)
                 .fragmentList(fragments)
                 .fragmentManager(getSupportFragmentManager())
-//                .mode(EasyNavigitionBar.MODE_ADD)
-//                .addIcon(R.mipmap.ic_launcher_round)
-//                .addLayoutHeight(100)
+                .mode(EasyNavigitionBar.MODE_ADD)
+                .addIcon(R.mipmap.ic_launcher_round)
+                .addIconSize(60)
+                .addLayoutHeight(100)
                 .navigitionHeight(60)
                 .canScroll(true)
 //                .smoothScroll(true)
-                    .iconSize(20)
-                   .tabTextSize(12)
+                    .iconSize(25)
+                   .tabTextSize(10)
                 .build();
     }
 
