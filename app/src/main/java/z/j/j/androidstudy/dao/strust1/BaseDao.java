@@ -1,20 +1,11 @@
-package z.j.j.androidstudy.dao;
+package z.j.j.androidstudy.dao.strust1;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.text.TextUtils;
-import android.view.Gravity;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 
 
 public class BaseDao implements BusinessResponse {

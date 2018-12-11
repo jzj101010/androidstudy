@@ -98,12 +98,14 @@ public class SecondFragment extends BaseFragment {
             public void onPageScrollStateChanged(int state) {
                    switch (state){
                        case ViewPager.SCROLL_STATE_IDLE:
-
+                           Log.e(TAG,"SCROLL_STATE_IDLE");
                            break;
                        case ViewPager.SCROLL_STATE_DRAGGING:
+                           Log.e(TAG,"SCROLL_STATE_DRAGGING");
                            handler.removeCallbacksAndMessages(null);
                            break;
                        case ViewPager.SCROLL_STATE_SETTLING:
+                           Log.e(TAG,"SCROLL_STATE_SETTLING");
                            handler.removeCallbacksAndMessages(null);
                            handler.sendEmptyMessageDelayed(0,2000);
                            break;
@@ -150,7 +152,7 @@ public class SecondFragment extends BaseFragment {
                         case  MotionEvent.ACTION_CANCEL:
                             Log.e(TAG,"ACTION_CANCEL");
 
-                            handler.sendEmptyMessageDelayed(0,2000);
+//                            handler.sendEmptyMessageDelayed(0,2000);
                             break;
                         case  MotionEvent.ACTION_UP:
                             Log.e(TAG,"ACTION_UP");
@@ -158,7 +160,7 @@ public class SecondFragment extends BaseFragment {
                             break;
                     }
 
-                    return false;
+                    return true;
                 }
             });
             container.addView(imageView);
