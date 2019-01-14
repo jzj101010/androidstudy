@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <z.j.j.androidstudy.view.MyViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+    </z.j.j.androidstudy.view.MyViewGroup>
+</LinearLayout>

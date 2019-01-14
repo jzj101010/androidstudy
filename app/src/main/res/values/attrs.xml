@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyView" >
+        <attr name="content_MyViewStyle" format="string" />
+        <attr name="isShow_MyViewStyle" format="boolean"/>
+        <attr name="background_MyViewStyle" format="color"/>
+        <attr name="select_MyViewStyle" >
+            <flag name="s1_MyViewStyle" value="1"/>
+            <flag name="s2_MyViewStyle" value="2"/>
+            <flag name="s3_MyViewStyle" value="3"/>
+        </attr>
+    </declare-styleable>
+</resources>

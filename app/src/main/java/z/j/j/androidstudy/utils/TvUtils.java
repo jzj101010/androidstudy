@@ -1,4 +1,4 @@
-package com.suishou.ems.Util;
+
 
 import android.text.TextUtils;
 import android.widget.TextView;
@@ -6,6 +6,9 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import z.j.j.androidstudy.utils.ToastUtils;
+import z.j.j.androidstudy.utils.Utils;
 
 /**
  * Created by j on 2018/9/5 0005.
@@ -25,7 +28,7 @@ public class TvUtils {
     static public boolean isEmptyTv(TextView textView, boolean b, String toa) {
         boolean re = textView == null || "".equals(textView.getText().toString());
         if (re && b) {
-            Utils.showToast(toa);
+            ToastUtils.showToas(toa);
         }
         return re;
     }
