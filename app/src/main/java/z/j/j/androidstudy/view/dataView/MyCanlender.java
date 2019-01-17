@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.lang.annotation.Retention;
@@ -28,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 import z.j.j.androidstudy.R;
+import z.j.j.androidstudy.activity.CalenderActivity;
 
 /**
  * Created by j on 2019/1/16 0016.
@@ -43,7 +45,7 @@ public class MyCanlender extends LinearLayout {
     private MyPagerAdapter myPagerAdaptr;
     private MyRecyclerAdapter myRecyclerAdapter;
     private LinearLayout rootView;             //根布局
-    static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//日期格式化
+     public   static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//日期格式化
 
     private BuidData buidData;
 
@@ -88,6 +90,7 @@ public class MyCanlender extends LinearLayout {
                 tv_month.setText(monthStr);
                 MyGridView gv = view.findViewById(R.id.gv_calendar);
                 gv.setHorizontalSpacing(4);
+                gv.setVerticalSpacing(4);
                 gv.setAdapter(new CalendarGridViewAdapter(gvList, MyCanlender.this. context,buidData.dayViewInterface,buidData.onDaySelectListener));
                 return view;
             }
@@ -129,9 +132,19 @@ public class MyCanlender extends LinearLayout {
         return buidData.monthViewInterface.getMonthView(cal.get(Calendar.YEAR)+"",cal.get(Calendar.MONTH)+1+"", gvList,view);
     }
 
+    public ListAdapter getCalendarGridViewAdapter(List gvList) {
+        return     new MyCanlender.CalendarGridViewAdapter(gvList, context, getBuidData().getDayViewInterface(), getBuidData().getOnDaySelectListener());
+    }
+
+    public void refresh() {
+        if(buidData.showType==ShowType.MOVER_L_R){
+            myPagerAdaptr.notifyDataSetChanged();
+        }else {
+         myRecyclerAdapter.notifyDataSetChanged();
+        }
 
 
-
+    }
 
 
     public  interface CustomMonthViewInterface{
@@ -238,6 +251,7 @@ public class MyCanlender extends LinearLayout {
                     }else {
                         myPagerAdaptr.notifyDataSetChanged();
                     }
+
                     scrollToPos(buidData.defaultShowPos);
                     break;
             }
@@ -268,10 +282,10 @@ public class MyCanlender extends LinearLayout {
         if(0<=pos&&pos<buidData.listDate.size()){
             switch (buidData.showType){
                 case ShowType.SCROLL_V:
-                    recyclerView.smoothScrollToPosition(buidData.defaultShowPos);
+                    recyclerView.scrollToPosition(buidData.defaultShowPos);
                     break;
                 case ShowType.SCROLL_H:
-                    recyclerView.smoothScrollToPosition(buidData.defaultShowPos);
+                    recyclerView.scrollToPosition(buidData.defaultShowPos);
                     break;
                 case ShowType.MOVER_L_R:
                     viewPager.setCurrentItem(buidData.defaultShowPos,true);
@@ -371,6 +385,7 @@ public class MyCanlender extends LinearLayout {
         private CustomMonthViewInterface monthViewInterface;
         private CustomDayViewInterface dayViewInterface;
         private OnDaySelectListener onDaySelectListener;
+
         public List<String> getListDate() {
             return listDate;
         }
@@ -511,6 +526,11 @@ public class MyCanlender extends LinearLayout {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return  POSITION_NONE;
         }
     }
 

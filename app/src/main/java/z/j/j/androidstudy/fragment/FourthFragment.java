@@ -23,6 +23,7 @@ public class FourthFragment extends BaseFragment {
     private TextView tv4;
     private TextView tv5;
     private TextView tv6;
+    private TextView tv7;
 
     @Nullable
     @Override
@@ -89,6 +90,15 @@ public class FourthFragment extends BaseFragment {
             public void onClick(View v) {
 
                 intent.putExtra("type", 6);
+                startActivity(intent);
+            }
+        });
+        tv7 = (TextView) view.findViewById(R.id.tv7);
+        tv7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent.putExtra("type", 7);
                 startActivity(intent);
             }
         });
