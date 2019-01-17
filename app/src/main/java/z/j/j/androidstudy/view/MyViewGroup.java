@@ -45,12 +45,6 @@ public class MyViewGroup extends ViewGroup {
             //测量子控件
             View child = getChildAt(i);
             measureChild(child, widthMeasureSpec, heightMeasureSpec);
-            //获得子控件的高度和宽度
-            int childHeight = child.getMeasuredHeight();
-            int childWidth = child.getMeasuredWidth();
-            //得到最大宽度，并且累加高度
-            height += childHeight;
-            width = Math.max(childWidth, width);
         }
        // 设置当前View的宽高
         setMeasuredDimension((measureWidthMode == MeasureSpec.EXACTLY) ? measureWidth: width, (measureHeightMode == MeasureSpec.EXACTLY) ? measureHeight: height);
@@ -59,17 +53,30 @@ public class MyViewGroup extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int top = 0;
+        int currentAddWidth = 0;
         int count = getChildCount();
+        int width=this.getWidth();
+        int currentWi=0;
+        int currentRow=0;
         for (int i=0;i<count;i++) {
             View child = getChildAt(i);
             int childHeight = child.getMeasuredHeight();
             int childWidth = child.getMeasuredWidth();
-            //该子控件在父容器的位置  ， 高度是之前所有子控件的高度和开始 ，从上往下排列，就实现了类似Linearlayout布局垂直排列的布局
-            child.layout(0+i*100, top, childWidth+i*100, top + childHeight); //以父容器左上角为原点进行布局
-            top += childHeight;
-        }
 
+            if(currentWi+childWidth>width){
+                if(currentWi>0){
+                    currentRow++;
+                    currentWi=0;
+                }
+
+            }
+            int l1=currentWi+20;
+            int t1=(childHeight+30)*currentRow+30;
+            int r1=l1+childWidth;
+            int b1=t1+childHeight;
+            child.layout(l1,t1,r1,b1);
+            currentWi+=childWidth+20;
+        }
         Log.e("MyViewGroup","onLayout");
     }
 

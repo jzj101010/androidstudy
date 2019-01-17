@@ -24,14 +24,14 @@ public class MainActivity extends BaseActivity {
     private List<android.support.v4.app.Fragment> fragments = new ArrayList<>();
     private EasyNavigitionBar navigitionBar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         fragments.add(new FirstFragment());
-        fragments.add(new SecondFragment());
         fragments.add(new ThirdFragment());
+        fragments.add(new SecondFragment());
         fragments.add(new FourthFragment());
         initView();
     }

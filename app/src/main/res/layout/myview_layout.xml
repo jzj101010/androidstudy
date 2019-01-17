@@ -7,8 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <z.j.j.androidstudy.view.MyView
-            android:layout_width="50dp"
+            android:layout_width="10dp"
             android:layout_height="50dp"
+            android:paddingLeft="20dp"
             app:content_MyViewStyle="content"
             app:isShow_MyViewStyle="true"
             app:select_MyViewStyle="s1_MyViewStyle"
@@ -17,6 +18,45 @@
         <z.j.j.androidstudy.view.MyView
             android:layout_width="80dp"
             android:layout_height="50dp"
+            android:paddingLeft="20dp"
+
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />  <z.j.j.androidstudy.view.MyView
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        app:content_MyViewStyle="content"
+        app:isShow_MyViewStyle="true"
+        app:select_MyViewStyle="s1_MyViewStyle"
+        app:background_MyViewStyle="#3093fe"
+        />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
             app:content_MyViewStyle="content"
             app:isShow_MyViewStyle="true"
             app:select_MyViewStyle="s1_MyViewStyle"

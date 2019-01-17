@@ -52,7 +52,6 @@ public class SecondFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return super.onCreateView(inflater, container, savedInstanceState);
         View view = View.inflate(activity, R.layout.secondfragment, null);
         initView(view);
         for (int i = 0; i <5 ; i++) {

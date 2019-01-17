@@ -36,12 +36,13 @@ public class MyView extends View {
         Log.d("viewStyle","content:"+mContent);
         Log.d("viewStyle","background:"+mBackground);
         Log.e("MyView","MyView");
-
     }
 
     public MyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
+    
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -53,7 +54,7 @@ public class MyView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(300,500);
+        setMeasuredDimension(widthMeasureSpec,heightMeasureSpec);
         Log.e("MyView","onMeasure");
     }
 
@@ -65,5 +66,8 @@ public class MyView extends View {
         canvas.drawColor(mBackground);
         canvas.drawCircle(150, 150, 50, paint);
         canvas.drawCircle(300, 300, 50, paint);
+        paint.setColor(0xffffffff);
+        paint.setTextSize(25);
+        canvas.drawText("view viewgroup",20,20,paint);
     }
 }

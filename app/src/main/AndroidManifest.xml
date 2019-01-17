@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ViewTestActivity"></activity>
+        <activity android:name=".activity.ViewTestActivity" />
+        <activity android:name=".activity.CalenderActivity"></activity>
     </application>
 
 </manifest>
