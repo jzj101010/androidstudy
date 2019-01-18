@@ -1,11 +1,10 @@
-package z.j.j.androidstudy.view.dataView;
+package z.j.j.androidstudy.view.dateView;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.IntDef;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -29,13 +27,12 @@ import java.util.Date;
 import java.util.List;
 
 import z.j.j.androidstudy.R;
-import z.j.j.androidstudy.activity.CalenderActivity;
 
 /**
  * Created by j on 2019/1/16 0016.
  */
 
-public class MyCanlender extends LinearLayout {
+public class ScrollMoveCanlender extends LinearLayout {
     private Context context;
 
 //    private NestedScrollView nestedScrollView;
@@ -52,12 +49,12 @@ public class MyCanlender extends LinearLayout {
     private CustomMonthViewInterface defaltMonthViewImp;
     private  CustomDayViewInterface defaltDayViewImp;
 
-    public MyCanlender(Context context) {
+    public ScrollMoveCanlender(Context context) {
         super(context);
         init(context);
     }
 
-    public MyCanlender(Context context, AttributeSet attrs) {
+    public ScrollMoveCanlender(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
@@ -81,17 +78,17 @@ public class MyCanlender extends LinearLayout {
             @Override
             public View getMonthView(String yearStr, String monthStr, List gvList,View view) {
                 if(view==null) {
-                     view = LayoutInflater.from(MyCanlender.this.context).inflate(R.layout.comm_calendar, null, false);//获取布局，开始初始化
+                     view = LayoutInflater.from(ScrollMoveCanlender.this.context).inflate(R.layout.comm_calendar, null, false);//获取布局，开始初始化
                 }
                 TextView tv_year = (TextView) view.findViewById(R.id.tv_year);
                 tv_year.setVisibility(View.VISIBLE);
                 tv_year.setText(yearStr + "年");
                 TextView tv_month = (TextView) view.findViewById(R.id.tv_month);
                 tv_month.setText(monthStr);
-                MyGridView gv = view.findViewById(R.id.gv_calendar);
+                MGridView gv = view.findViewById(R.id.gv_calendar);
                 gv.setHorizontalSpacing(4);
                 gv.setVerticalSpacing(4);
-                gv.setAdapter(new CalendarGridViewAdapter(gvList, MyCanlender.this. context,buidData.dayViewInterface,buidData.onDaySelectListener));
+                gv.setAdapter(new CalendarGridViewAdapter(gvList, ScrollMoveCanlender.this. context,buidData.dayViewInterface,buidData.onDaySelectListener));
                 return view;
             }
         };
@@ -103,7 +100,7 @@ public class MyCanlender extends LinearLayout {
                 GrideViewHolder holder;
                 if (convertView == null) {
                     holder = new GrideViewHolder();
-                    convertView = inflate(MyCanlender.this. context, R.layout.common_calendar_gridview_item, null);
+                    convertView = inflate(ScrollMoveCanlender.this. context, R.layout.common_calendar_gridview_item, null);
                     holder.tv = (TextView) convertView.findViewById(R.id.tv_calendar);
                     holder.tvDay = (TextView) convertView.findViewById(R.id.tv_calendar_day);
                     convertView.setTag(holder);
@@ -133,7 +130,7 @@ public class MyCanlender extends LinearLayout {
     }
 
     public ListAdapter getCalendarGridViewAdapter(List gvList) {
-        return     new MyCanlender.CalendarGridViewAdapter(gvList, context, getBuidData().getDayViewInterface(), getBuidData().getOnDaySelectListener());
+        return     new ScrollMoveCanlender.CalendarGridViewAdapter(gvList, context, getBuidData().getDayViewInterface(), getBuidData().getOnDaySelectListener());
     }
 
     public void refresh() {

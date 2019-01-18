@@ -1,20 +1,20 @@
-package z.j.j.androidstudy.view.dataView;
+package z.j.j.androidstudy.view.dateView;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-public class MyGridView extends GridView { 
+public class MGridView extends GridView {
 
-    public MyGridView(Context context, AttributeSet attrs) { 
+    public MGridView(Context context, AttributeSet attrs) {
         super(context, attrs); 
     } 
 
-    public MyGridView(Context context) { 
+    public MGridView(Context context) {
         super(context); 
     } 
 
-    public MyGridView(Context context, AttributeSet attrs, int defStyle) { 
+    public MGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle); 
     } 
 

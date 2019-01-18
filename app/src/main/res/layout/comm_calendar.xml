@@ -121,7 +121,7 @@
             android:background="#E4E4E4"
             android:visibility="gone" />
 
-        <z.j.j.androidstudy.view.dataView.MyGridView
+        <z.j.j.androidstudy.view.dateView.MGridView
             android:id="@+id/gv_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

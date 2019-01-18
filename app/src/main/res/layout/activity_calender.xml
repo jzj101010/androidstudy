@@ -7,14 +7,14 @@
     android:orientation="vertical"
     tools:context="z.j.j.androidstudy.activity.CalenderActivity">
 
-    <z.j.j.androidstudy.view.dataView.MyCanlender
+    <z.j.j.androidstudy.view.dateView.ScrollMoveCanlender
         android:id="@+id/mycanlend"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="49dp"
         tools:layout_editor_absoluteY="0dp">
 
-    </z.j.j.androidstudy.view.dataView.MyCanlender>
+    </z.j.j.androidstudy.view.dateView.ScrollMoveCanlender>
 
     <TextView
         android:id="@+id/pre"
