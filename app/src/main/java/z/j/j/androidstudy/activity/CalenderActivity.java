@@ -33,7 +33,6 @@ public class CalenderActivity extends AppCompatActivity {
          myCanlend = findViewById(R.id.mycanlend);
 
         switch (type) {
-
             case 1:
                 myCanlend.setBuidData(ScrollMoveCanlender.getBuidDataInstance()
                         .buidDateList(53, new Date(), 54)
@@ -130,6 +129,7 @@ public class CalenderActivity extends AppCompatActivity {
 
             case 7:
                  showInOutCanlender();
+                 showChange();
                 break;
 
         }
@@ -185,7 +185,6 @@ public class CalenderActivity extends AppCompatActivity {
                         textView.setGravity(Gravity.CENTER);
                         textView.setPadding(0, 50, 0, 50);
                         try {
-
                             Long aLong=   ScrollMoveCanlender.dateFormat.parse(year+"-"+mon+"-"+day).getTime();
                             if(inDate!=null&&inDate.getTime()==aLong){
                                 textView.setText("开始");
@@ -276,8 +275,6 @@ public class CalenderActivity extends AppCompatActivity {
                         }
                     }
                 });
-        showChange();
-
 
         myCanlend.setBuidData(buidData);
         myCanlend.build();

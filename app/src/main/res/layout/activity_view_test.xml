@@ -11,20 +11,77 @@
         android:layout_height="wrap_content">
     </z.j.j.androidstudy.view.TopView>
 
-     <TextView
-         android:id="@+id/tv1"
-         android:layout_width="match_parent"
-         android:layout_height="40dp"
-         android:text="111111111111"
-         android:gravity="center" />
-
-    <TextView
-        android:id="@+id/tv2"
+    <z.j.j.androidstudy.view.MyViewGroup
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="22222222222"
-        android:gravity="center" />
+        android:layout_height="match_parent">
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
 
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />  <z.j.j.androidstudy.view.MyView
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        app:content_MyViewStyle="content"
+        app:isShow_MyViewStyle="true"
+        app:select_MyViewStyle="s1_MyViewStyle"
+        app:background_MyViewStyle="#3093fe"
+        />
+        <z.j.j.androidstudy.view.MyView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            app:content_MyViewStyle="content"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+
+
+        <z.j.j.androidstudy.view.MyViewTwo
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            app:content_MyViewStyle="content111"
+            app:isShow_MyViewStyle="true"
+            app:select_MyViewStyle="s1_MyViewStyle"
+            app:background_MyViewStyle="#3093fe"
+            />
+    </z.j.j.androidstudy.view.MyViewGroup>
 
 
 </LinearLayout>

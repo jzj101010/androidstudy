@@ -41,11 +41,12 @@ public class MyViewGroup extends ViewGroup {
         int height = 0;              //记录根容器的高度
         int width = 0;               //记录根容器的宽度
         int count = getChildCount(); //记录容器内的子控件个数
-        for (int i=0;i<count;i++) {
-            //测量子控件
-            View child = getChildAt(i);
-            measureChild(child, widthMeasureSpec, heightMeasureSpec);
-        }
+//        for (int i=0;i<count;i++) {
+//            //测量子控件
+//            View child = getChildAt(i);
+//            measureChild(child, widthMeasureSpec, heightMeasureSpec);
+//        }
+        measureChildren(widthMeasureSpec,heightMeasureSpec);
        // 设置当前View的宽高
         setMeasuredDimension((measureWidthMode == MeasureSpec.EXACTLY) ? measureWidth: width, (measureHeightMode == MeasureSpec.EXACTLY) ? measureHeight: height);
         Log.e("MyViewGroup","onMeasure");
