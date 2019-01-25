@@ -1,12 +1,13 @@
 package z.j.j.androidstudy.view;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Scroller;
 
 
 /**
@@ -18,8 +19,10 @@ public class MyViewPager extends ViewGroup {
   private GestureDetector gestureDetector;
     private float startX;
     private int currentPage=0;
-    private MyViewPagerScroll myViewPagerScroll=new MyViewPagerScroll();
-
+//    private MyViewPagerScroll myViewPagerScroll;
+private Scroller myViewPagerScroll;
+    private int scrollDistance;
+    private OnPagerScrolledListener pagerScrolledListener;
 
     public MyViewPager(Context context) {
         super(context);
@@ -30,7 +33,7 @@ public class MyViewPager extends ViewGroup {
         super(context, attrs);
     }
     private  void init(){
-
+        myViewPagerScroll=new Scroller(getContext());
 
         gestureDetector=new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
             @Override
@@ -75,25 +78,16 @@ public class MyViewPager extends ViewGroup {
         });
     }
 
-    private void scrollToPager() {
-          if(currentPage<0){
-              currentPage=0;
-          }
-          if(currentPage>getChildCount()-1){
-              currentPage=getChildCount()-1;
-          }
-        myViewPagerScroll.startScroll(getScrollX(),getScrollY(),currentPage*getWidth()-getScrollX(),0);
-         invalidate();
-          //        scrollTo(currentPage*getWidth(),0);
-    }
+
 
     @Override
     public void computeScroll() {
         super.computeScroll();
-        if(myViewPagerScroll.computeScroll()){
-            scrollTo(myViewPagerScroll.getScrollX(),0);
+        if(myViewPagerScroll.computeScrollOffset()){
+            scrollTo((int) myViewPagerScroll.getCurrX(),0);
             invalidate();
         }
+
 
     }
 
@@ -120,15 +114,25 @@ public class MyViewPager extends ViewGroup {
 
                 break;
             case MotionEvent.ACTION_UP:
-
-                float endX = event.getX();
-                if(endX - startX>getWidth()/2){
-                    currentPage--;
-                }
+                float endX=event.getX();
                 if(startX-endX>getWidth()/2){
                     currentPage++;
                 }
-                scrollToPager();
+                if(endX-startX>getWidth()/2){
+                    currentPage--;
+                }
+
+                if(currentPage<0){
+                    currentPage=0;
+                }
+                if(currentPage>getChildCount()-1){
+                    currentPage=getChildCount()-1;
+                }
+
+                scrollToPager(currentPage);
+
+
+// /                scrollTo( currentPage*getWidth(),0);
                 break;
         }
 
@@ -141,4 +145,25 @@ public class MyViewPager extends ViewGroup {
 
 
     }
+
+    public void scrollToPager(int currentPage) {
+        if(pagerScrolledListener!=null){
+            pagerScrolledListener.onPagerScrolled(currentPage);
+        }
+        scrollDistance = currentPage * getWidth() - getScrollX();
+        myViewPagerScroll.startScroll(getScrollX(),getScrollY(), scrollDistance,0,Math.abs(scrollDistance));
+        invalidate();
+    }
+
+    public void setOnPagerScrolledListener( OnPagerScrolledListener l) {
+        this.pagerScrolledListener=l;
+    }
+
+    public interface OnPagerScrolledListener{
+
+        void onPagerScrolled(int pagerPos);
+    }
+
+
+
 }

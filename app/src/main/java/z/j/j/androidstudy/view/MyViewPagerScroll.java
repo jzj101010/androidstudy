@@ -1,5 +1,6 @@
 package z.j.j.androidstudy.view;
 
+import android.content.Context;
 import android.os.SystemClock;
 
 /**
@@ -8,42 +9,60 @@ import android.os.SystemClock;
 
 public class MyViewPagerScroll {
 
-
-    private int startX;
-    private int startY;
-    private int distanceX;
-    private int distanceY;
-    private boolean isFinish;
-    private int scrollTime=500;
-
+    private  long startX;
+    private long distanceX;
+    private long distanceY;
+    private boolean isFinish=true;
+    private long scrollTime;
+    private int defaultScrollTime=250;
     private long preTime;
+    private long startTime;
+    private long scrollX;
 
-    private int scrollX;
+    public MyViewPagerScroll(Context context){
+
+    }
 
 
-    public int getScrollX() {
+    public long getCurrX() {
         return scrollX;
     }
 
-    public void startScroll(int startX, int startY, int distanceX, int distanceY){
-        this.scrollX=  this.startX=startX;
-        this.startY=startY;
+
+    public void startScroll(int startX, int startY, int distanceX, int distanceY ) {
+
+
+        startScroll(startX,startY,distanceX,distanceY,defaultScrollTime);
+    }
+
+
+        public void startScroll(int startX, int startY, int distanceX, int distanceY,int scrollTime ){
+        this.scrollX=this.startX=startX;
         this.distanceX=distanceX;
         this.distanceY=distanceY;
-        preTime=SystemClock.uptimeMillis();
+         preTime=SystemClock.uptimeMillis();
+        startTime=0;
+        this.scrollTime=scrollTime/4;
+        if(this.scrollTime<defaultScrollTime){
+            this.scrollTime=defaultScrollTime;
+        }
         this.isFinish=false;
     }
 
 
-    public boolean computeScroll(){
-        if(scrollX==startX+distanceX){
+    public boolean computeScrollOffset() {
+        if (isFinish) {
             return false;
-        }
-        int scrollDistance= (int) ((SystemClock.uptimeMillis()-preTime)*distanceX/scrollTime);
-        scrollX+=scrollDistance;
-
-        if(scrollX>startX+distanceX){
-            scrollX=startX+distanceX;
+        } else {
+            long time = SystemClock.uptimeMillis() - preTime;
+            preTime = SystemClock.uptimeMillis();
+            long scroDistans = time * distanceX / scrollTime;
+            scrollX += scroDistans;
+            startTime += time;
+            if (startTime >= scrollTime) {
+                scrollX=startX+distanceX;
+                isFinish = true;
+            }
         }
         return true;
     }
