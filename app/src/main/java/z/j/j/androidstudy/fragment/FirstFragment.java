@@ -30,7 +30,7 @@ public class FirstFragment extends BaseFragment {
 
     XRecyclerView recyclerView;
     View view;
-     RecyclerViewAdapt recyclerViewAdapt;
+    RecyclerViewAdapt recyclerViewAdapt;
      List list= new ArrayList();
     @Override
     public void onAttach(Context context) {

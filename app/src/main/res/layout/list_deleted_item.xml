@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<z.j.j.androidstudy.view.MySlideFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:text="content"/>
+    <TextView
+        android:id="@+id/tv_deleted"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="#f22144"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:text="content"/>
+
+
+</z.j.j.androidstudy.view.MySlideFrameLayout>

@@ -56,6 +56,14 @@ public class ThirdFragment extends BaseFragment {
             }
         });
         tv3 = (TextView) view.findViewById(R.id.tv3);
+        tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), ViewTestActivity.class);
+                intent.putExtra("type", 3);
+                startActivity(intent);
+            }
+        });
         tv4 = (TextView) view.findViewById(R.id.tv4);
         tv5 = (TextView) view.findViewById(R.id.tv5);
         tv6 = (TextView) view.findViewById(R.id.tv6);
