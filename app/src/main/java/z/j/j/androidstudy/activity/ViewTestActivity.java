@@ -1,5 +1,6 @@
 package z.j.j.androidstudy.activity;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,10 +14,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import z.j.j.androidstudy.R;
-import z.j.j.androidstudy.utils.EventBusUtil;
+import z.j.j.androidstudy.adapt.commonAdapt.CommonAdapter;
+import z.j.j.androidstudy.adapt.commonAdapt.ViewHolder;
+import z.j.j.androidstudy.bean.Person;
+import z.j.j.androidstudy.view.IndexView;
 import z.j.j.androidstudy.view.MySlideFrameLayout;
 import z.j.j.androidstudy.view.MyViewPager;
 
@@ -42,11 +48,12 @@ public class ViewTestActivity extends BaseActivity {
             case 3:
                 showCehuaView();
                 break;
-
+            case 4:
+                showIndexView();
+                break;
         }
         initView();
     }
-
 
 
 
@@ -167,5 +174,112 @@ public class ViewTestActivity extends BaseActivity {
 
     }
 
+
+    ListView listView;
+    List<Person> personList=new ArrayList<>();
+    private void showIndexView() {
+        personList.add(new Person("aA风格"));
+        personList.add(new Person("B共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("s共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("儿童"));
+        personList.add(new Person("x风e格"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("v儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("e等多个"));
+        personList.add(new Person("t儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("u共和"));
+        personList.add(new Person("o等多个"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("e等多个"));
+        personList.add(new Person("t儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("u共和"));
+        personList.add(new Person("o等多个"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("e等多个"));
+        personList.add(new Person("t儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("u共和"));
+        personList.add(new Person("o等多个"));
+        personList.add(new Person("儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("儿童"));
+        personList.add(new Person("风格"));
+        personList.add(new Person("共和"));
+        personList.add(new Person("等多个"));
+        personList.add(new Person("儿童"));
+        Collections.sort(personList, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getPingyin().compareTo(o2.getPingyin());
+            }
+        });
+        setContentView(R.layout.activity_index_view);
+       final TextView tv_center=findViewById(R.id.tv_center);
+        tv_center.setVisibility(View.GONE);
+        tv_center.setBackgroundColor(0xff3093fe);
+        tv_center.setTextColor(0xffa4a4a4);
+        IndexView indexView=findViewById(R.id.index);
+        indexView.setOnSelectIndexListener(new IndexView.OnSelectIndexListener() {
+            @Override
+            public void selectIndex(String s) {
+                tv_center.setText(s);
+                tv_center.setVisibility(View.VISIBLE);
+                scrollToStr(s);
+            }
+
+            @Override
+            public void selectCancel() {
+                tv_center.setVisibility(View.GONE);
+            }
+        });
+         listView=findViewById(R.id.listview);
+        listView.setAdapter(new CommonAdapter<Person>(this,personList,R.layout.indexview_item) {
+
+            @Override
+            public void convert(z.j.j.androidstudy.adapt.commonAdapt.ViewHolder holder, Person person, int position) {
+                String p = person.getPingyin().substring(0, 1);
+                if(position==0){
+                    holder.setVisibility(R.id.tv1, View.VISIBLE);
+                }else {
+                    String p2 = getItem(position - 1).getPingyin().substring(0, 1);
+                    if (p .equals(p2) ) {
+                        holder.setVisibility(R.id.tv1, View.GONE);
+                    }else {
+                        holder.setVisibility(R.id.tv1, View.VISIBLE);
+                    }
+                }
+                holder.setText(R.id.tv1,p);
+                holder.setText(R.id.tv2,person.getName());
+            }
+        });
+    }
+
+    private void scrollToStr(String s) {
+        for (int i = 0; i <personList.size() ; i++) {
+            if(s.equals(personList.get(i).getPingyin().substring(0,1))){
+                listView.setSelection(i);
+               break;
+            }
+        }
+    }
 
 }

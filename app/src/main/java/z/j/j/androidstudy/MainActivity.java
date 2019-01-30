@@ -15,7 +15,7 @@ import z.j.j.androidstudy.fragment.ThirdFragment;
 
 
 public class MainActivity extends BaseActivity {
-    private String[] tabText = {"RECYCLERV", "VIEWPAGER", "me", "me"};
+    private String[] tabText = {"RECYCLERV", "VIEWPAGER", "zidingyikongjian", "rilikongjian"};
     //未选中icon
     private int[] normalIcon = {R.mipmap.uncheck, R.mipmap.uncheck, R.mipmap.uncheck, R.mipmap.uncheck};
     //选中时icon

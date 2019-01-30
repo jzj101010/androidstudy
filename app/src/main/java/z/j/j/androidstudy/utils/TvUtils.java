@@ -1,22 +1,22 @@
-
+package z.j.j.androidstudy.utils;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import z.j.j.androidstudy.utils.ToastUtils;
-import z.j.j.androidstudy.utils.Utils;
+import java.util.regex.Pattern;
 
 /**
  * Created by j on 2018/9/5 0005.
  */
 
 public class TvUtils {
-    public static DecimalFormat amountFormat = new DecimalFormat("#,###.####");
-    public static DecimalFormat amountFormat2 = new DecimalFormat("#.##");
+    public final  static DecimalFormat amountFormat = new DecimalFormat("#,###.####");
+    public final  static DecimalFormat amountFormat2 = new DecimalFormat("#.##");
 
     private TvUtils() {
     }
@@ -55,7 +55,11 @@ public class TvUtils {
                     result = getSdf().format(new Date(Long.parseLong(time)));
                 }
             } catch (Exception e) {
-                result = time;
+                if(isShowSecond){
+                    result = time;
+                }else {
+                    result=dateSpliHMS(time);
+                }
             }
         }
         return result;
@@ -80,6 +84,10 @@ public class TvUtils {
         if (TextUtils.isEmpty(number) || "null".equals(number)) {
             result = emptyDefaultStr;
         } else {
+            if (checkScientificCount(number)) {
+                BigDecimal bd = new BigDecimal(number);
+                number = bd.toPlainString();
+            }
             try {
                 if (formatObj == null) {
                     if (isShowComma) {
@@ -134,7 +142,7 @@ public class TvUtils {
             SimpleDateFormat sdf = isShowSecond ? getSdfHms() : getSdf();
             return String.valueOf(sdf.parse(date_str).getTime() / 1000);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(e.getClass().getSimpleName(),e.getMessage());
         }
         return date_str;
     }
@@ -158,5 +166,13 @@ public class TvUtils {
 
     public static String dateSpliHMS(String time) {
         return dateSpliHMS(time, "");
+    }
+
+    /**
+     * 检测是否是科学计数法
+     */
+    public static boolean checkScientificCount(String value) {
+        String regex = "^((((-?[1-9]{1}\\d*)|(-?[0]{1}))(\\.(\\d*))?)[Ee]{1}(-?(-?[1-9]{1}\\d*)|(-?[0]{1})))$";
+        return Pattern.matches(regex, value);
     }
 }

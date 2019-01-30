@@ -121,9 +121,9 @@ public class CalenderActivity extends AppCompatActivity {
                 break;
             case 6:
                 myCanlend.setBuidData(ScrollMoveCanlender.getBuidDataInstance()
-                        .buidDateList(3, new Date(), 4)
+                        .buidDateList(0, new Date(), 4)
                         .buildShowType(ScrollMoveCanlender.ShowType.MOVER_L_R)
-                        .buildDefaultShowPos(4));
+                        .buildDefaultShowPos(6));
                 showChange();
                 break;
 
